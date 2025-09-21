@@ -1,23 +1,35 @@
-# Node.js
+# Node / React
 node_modules/
-npm-debug.log
-yarn-debug.log
-yarn-error.log
+build/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Environment files
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-*.egg-info/
-*.egg
+# Secret / Key files
+backend/serviceAccountKey.json
+*.key
+*.pem
+*.p12
+*.json    # only if it contains secrets
 
-# Build
-dist/
-build/
+# OS / IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Logs
+logs/
+*.log
