@@ -1,0 +1,13 @@
+/* App-specific styles */
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  min-height: calc(100vh - 70px);
+}
+
+/* Remove old header styles since we now have navigation */
