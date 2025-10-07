@@ -17,7 +17,10 @@ const PORT = process.env.PORT || 5000;
 initializeFirebaseAdmin();
 
 // Security middleware
-app.use(helmet());
+app.use(helmet({
+  crossOriginOpenerPolicy: false, // Allow popups for OAuth
+  crossOriginEmbedderPolicy: false
+}));
 
 // Rate limiting
 const limiter = rateLimit({

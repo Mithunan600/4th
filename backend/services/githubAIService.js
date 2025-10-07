@@ -26,6 +26,12 @@ class GithubAIService {
 
   // Analyze plant disease using image + text
   async analyzeImage(imagePath, symptoms) {
+    // Check if GitHub token is available
+    if (!this.token || this.token === 'your_github_token_here' || this.token === 'ghp_your_github_token_here') {
+      console.log("⚠️ GitHub token not configured, using fallback analysis");
+      return this.getFallbackAnalysis(symptoms);
+    }
+
     try {
       console.log("➡️ analyzeImage called with:", { imagePath, symptoms });
 
@@ -111,8 +117,35 @@ class GithubAIService {
       return { answer, raw: data };
     } catch (error) {
       console.error("💥 Error in analyzeImage:", error.message);
-      throw error;
+      console.log("⚠️ Falling back to basic analysis");
+      return this.getFallbackAnalysis(symptoms);
     }
+  }
+
+  getFallbackAnalysis(symptoms) {
+    return {
+      answer: `Based on the symptoms you described: "${symptoms}", this appears to be a plant health issue. 
+
+**Note**: AI analysis is currently unavailable. Please:
+1. Check for common plant diseases in your area
+2. Look for patterns in leaf discoloration or spots
+3. Consider environmental factors (water, light, soil)
+4. Consult a local plant expert or agricultural extension service
+
+**Common plant issues to check**:
+- Overwatering or underwatering
+- Nutrient deficiencies
+- Fungal infections
+- Pest damage
+- Environmental stress
+
+For accurate diagnosis, please provide more details about:
+- Plant type
+- Location of symptoms
+- Recent changes in care
+- Environmental conditions`,
+      raw: { fallback: true, symptoms }
+    };
   }
 
   // Take the freeform model answer and ask the model again to structure it as strict JSON
